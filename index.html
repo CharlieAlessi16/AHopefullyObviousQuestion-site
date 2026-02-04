@@ -16,6 +16,23 @@
       overflow: hidden;
     }
 
+    /* SIDE IMAGES (NEW) */
+    .side-image {
+      position: fixed;
+      width: 150px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+
+    #leftImage {
+      left: 30px;
+    }
+
+    #rightImage {
+      right: 30px;
+    }
+
     .card {
       background: white;
       padding: 40px 50px;
@@ -32,7 +49,6 @@
       100% {transform: scale(1);}
     }
 
-    /* image stack */
     .image-stack img {
       width: 120px;
       margin-bottom: 5px;
@@ -59,21 +75,26 @@
       font-size: 18px;
       cursor: pointer;
       transition: 0.2s;
+      position: absolute; /* needed for fixed spots */
     }
 
+    /* YES BUTTON FIXED (NEW) */
     #yesBtn {
       background: #ff5fa2;
       color: white;
+      left: 30px;
+      top: 20px;
     }
 
     #yesBtn:hover {
       transform: scale(1.1);
     }
 
+    /* NO BUTTON START POSITION (NEW) */
     #noBtn {
       background: lightgray;
-      position: absolute;
-      left: 140px;
+      left: 180px;
+      top: 20px;
       transition: left 0.25s, top 0.25s;
     }
 
@@ -151,9 +172,12 @@
 
 <body>
 
+<!-- SIDE IMAGES (NEW) -->
+<img src="jolt.jpg" class="side-image" id="leftImage">
+<img src="coil.jpg.jpeg" class="side-image" id="rightImage">
+
 <div class="card" id="card">
 
-  <!-- TWO IMAGES -->
   <div class="image-stack">
     <img src="jolt.jpg"/>
     <img src="coil.jpg.jpeg"/>
@@ -167,7 +191,6 @@
   </div>
 </div>
 
-<!-- POPUP -->
 <div class="modal" id="dateModal">
   <div class="modal-content">
     <h2>Our Date 💖</h2>
@@ -195,7 +218,6 @@
   const card = document.getElementById("card");
   const modal = document.getElementById("dateModal");
 
-  // less sporadic movement
   noBtn.addEventListener("mouseover", () => {
     const currentLeft = noBtn.offsetLeft;
     const currentTop = noBtn.offsetTop;
