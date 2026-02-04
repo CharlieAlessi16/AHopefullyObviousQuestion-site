@@ -32,9 +32,13 @@
       100% {transform: scale(1);}
     }
 
-    img {
+    /* image stack */
+    .image-stack img {
       width: 120px;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     h1 {
@@ -70,7 +74,7 @@
       background: lightgray;
       position: absolute;
       left: 140px;
-      transition: left 0.15s, top 0.15s;
+      transition: left 0.25s, top 0.25s;
     }
 
     .heart {
@@ -96,7 +100,6 @@
       to {transform: translateY(100vh);}
     }
 
-    /* POPUP MODAL */
     .modal {
       display: none;
       position: fixed;
@@ -149,7 +152,13 @@
 <body>
 
 <div class="card" id="card">
-  <img src="jolt.jpg"/>
+
+  <!-- TWO IMAGES -->
+  <div class="image-stack">
+    <img src="jolt.jpg"/>
+    <img src="xxxx"/>
+  </div>
+
   <h1>Lydia will you be my Valentine? 💕</h1>
 
   <div class="buttons">
@@ -186,12 +195,16 @@
   const card = document.getElementById("card");
   const modal = document.getElementById("dateModal");
 
+  // less sporadic movement
   noBtn.addEventListener("mouseover", () => {
-    const rect = card.getBoundingClientRect();
-    const x = Math.random() * (rect.width - noBtn.offsetWidth);
-    const y = Math.random() * (rect.height - noBtn.offsetHeight);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    const currentLeft = noBtn.offsetLeft;
+    const currentTop = noBtn.offsetTop;
+
+    const moveX = (Math.random() * 120) - 60;
+    const moveY = (Math.random() * 60) - 30;
+
+    noBtn.style.left = currentLeft + moveX + "px";
+    noBtn.style.top = currentTop + moveY + "px";
   });
 
   document.getElementById("yesBtn").addEventListener("click", () => {
@@ -209,7 +222,6 @@
     modal.style.display = "none";
   }
 
-  // Floating hearts
   setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
@@ -222,7 +234,6 @@
     }, 4000);
   }, 600);
 
-  // Confetti explosion
   function launchConfetti() {
     for (let i = 0; i < 100; i++) {
       const confetti = document.createElement("div");
